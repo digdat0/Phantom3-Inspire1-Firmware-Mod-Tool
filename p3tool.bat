@@ -3,7 +3,7 @@ REM Created May 08, 2018 by digdat0
 REM I'm not a programmer guys
 REM Credits to mefistotelis for the awesome p3 tools
 REM Credit to binary, i borrowed some stuff from your apk batch files
-REM Credit to czokie for file hosting (check out dank downloader tool)
+REM Credit to cs2000 for file hosting (check out dank downloader tool)
 REM Credit to java dudes, I'll add a GPL or needed to use download.jar
 REM Thanks to DJI for pushing content on GitHub
 REM
