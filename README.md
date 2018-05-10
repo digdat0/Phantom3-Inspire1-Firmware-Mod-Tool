@@ -3,9 +3,19 @@ A batch file which makes the Phantom 3 and Inspire 1 modding process more user f
 
 You select your aircraft, then your version. If that firmware isn't already downloaded, it downloads it. After download it opens a menu of options. It can extract the firmware, extract the flight controller module, allow you to edit the parameters (hoping to add patching one day), re-compile the flight controller module with updated parameters, rename the flight controller module to a service file to allow install, clean-up the files and also create a debug file.
 
-The steps are supposed to be run in sequence
+The steps are supposed to be run in sequence 1-4
 
-DJI Inspire 1 will come soon ...
+Supported aircraft:
+
+ - Phantom 3 Professional
+ - Phantom 3 Advanced
+ - Phantom 3 Standard
+ - Phantom 3 4k
+ - Phantom 3 Se
+ - Inspire 1 v1
+ - Inspire 1 Pro FC350
+ - Inspire 1 Pro FC550
+ - Inspire 1 Pro RAW 
 
 To use .. download the two files, put in same folder. Run the batch file. You need Java and Python installed.
 
