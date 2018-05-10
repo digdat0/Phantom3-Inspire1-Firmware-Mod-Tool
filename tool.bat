@@ -24,11 +24,11 @@ javac -version >nul 2>&1 && ( GOTO:MENU
   pause
  exit )
 :MENU
-CLS
 SET APPVER=1.1
 SET ORIGDATE=May 8, 2018
 SET SAVEDATE=%DATE%
 SET PARAMFILE=flyc_param_infos
+CLS
 ECHO.
 ECHO ---------------------------------------------------------
 ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
@@ -43,7 +43,7 @@ ECHO  4 - Phantom 3 4k             (P3XW)
 ECHO  5 - Phantom 3 SE             (P3SE)
 ECHO  6 - Inspire 1 v1             (WM610)
 ECHO  7 - Inspire 1 Pro            (WM610_FC350)
-ECHO  8 - Inspire 1 Pro RAW        (WM610_FC550)
+ECHO  8 - Inspire 1 Pro and RAW    (WM610_FC550)
 ECHO.
 ECHO  A - About
 ECHO  Q - Quit
@@ -67,6 +67,7 @@ CLS
 SET AC=Phantom 3 Professional
 SET DEBUGNAME=P3X_FW_DEBUG
 SET FWNAME=PMCAPPFw3.bin
+SET FWNAME2=MCAPPFw.bin
 ECHO.
 ECHO ---------------------------------------------------------
 ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
@@ -137,7 +138,6 @@ ECHO Downloading firmware, please wait ..
 java -jar download.jar http://dji.polybotes.feralhosting.com/DJI-Firmware/Upload/P3_PRO/P3X_FW_V01.01.0008.bin P3X_FW_V01.01.0008.bin
 )
 ECHO File Download Finished, lets patch ..
-pause
 timeout 2 >nul
 GOTO FWPATCH
 :P3PRODL3
@@ -310,6 +310,7 @@ CLS
 SET AC=Phantom 3 Advanced
 SET DEBUGNAME=P3S_FW_DEBUG
 SET FWNAME=PMCAPPFw3.bin
+SET FWNAME2=MCAPPFw.bin
 ECHO.
 ECHO ---------------------------------------------------------
 ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
@@ -638,6 +639,7 @@ CLS
 SET AC=Phantom 3 Standard
 SET DEBUGNAME=P3C_FW_DEBUG
 SET FWNAME=PMCAPPFw3.bin
+SET FWNAME2=MCAPPFw.bin
 ECHO.
 ECHO ---------------------------------------------------------
 ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
@@ -1016,6 +1018,7 @@ CLS
 SET AC=Phantom 3 4k
 SET DEBUGNAME=P3XW_FW_DEBUG
 SET FWNAME=PMCAPPFw3.bin
+SET FWNAME2=MCAPPFw.bin
 ECHO.
 ECHO ---------------------------------------------------------
 ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
@@ -1242,6 +1245,7 @@ CLS
 SET AC=Phantom 3 SE
 SET DEBUGNAME=P3SE_FW_DEBUG
 SET FWNAME=PMCAPPFw3.bin
+SET FWNAME2=MCAPPFw.bin
 ECHO.
 ECHO ---------------------------------------------------------
 ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
@@ -1584,7 +1588,8 @@ GOTO FWPATCH
 CLS
 SET AC=Inspire 1 v1
 SET DEBUGNAME=WM610_FW_DEBUG
-SET FWNAME=INCAPPFw3.bin
+SET FWNAME=INMCAPPFw1.bin
+SET FWNAME2=MCAPPFw.bin
 ECHO.
 ECHO ---------------------------------------------------------
 ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
@@ -1714,7 +1719,7 @@ GOTO FWPATCH
 :INSP1DL4
 SET FILENAME=WM610_v01.00.0013.bin 
 SET FILENAME2=WM610_v01.00.0013_m0306.bin
-SET VERSION=
+SET VERSION=1.00.0013
 IF EXIST "tools\%FILENAME%" (
 GOTO FWPATCH 
 ) ELSE (
@@ -2150,7 +2155,8 @@ GOTO FWPATCH
 CLS
 SET AC=Inspire 1 Pro (WM610_FC350)
 SET DEBUGNAME=WM610_FC350_FW_DEBUG
-SET FWNAME=INCAPPFw3.bin
+SET FWNAME=INMCAPPFw1.bin
+SET FWNAME2=MCAPPFw.bin
 ECHO.
 ECHO ---------------------------------------------------------
 ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
@@ -2223,7 +2229,8 @@ GOTO FWPATCH
 CLS
 SET AC=Inspire 1 Pro and RAW (WM610_FC550)
 SET DEBUGNAME=WM610_FC550_FW_DEBUG
-SET FWNAME=INCAPPFw3.bin
+SET FWNAME=INMCAPPFw1.bin
+SET FWNAME2=MCAPPFw.bin
 ECHO.
 ECHO ---------------------------------------------------------
 ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
@@ -2271,7 +2278,6 @@ GOTO FWPATCH
 ECHO.
 ECHO Downloading firmware, please wait .. 
 ECHO.
-pause
 java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1 Pro/WM610_FC550_FW_V01.00.00.30.bin" WM610_FC550_FW_V01.00.00.30.bin
 )
 ECHO File Download Finished, lets patch ..
@@ -2598,12 +2604,10 @@ cd fw
 python dji_flyc_param_ed.py -vv -u -m %FILENAME2%
 copy %FILENAME2% ..
 copy %PARAMFILE% ..
-cd..
+cd ..
 copy %FILENAME2% Finished_Firmware_Files
 copy %PARAMFILE% Finished_Firmware_Files
-del %FILENAME2%
-del %PARAMFILE%
-cd..
+cd ..
 ECHO Compiled new flight controller module successfully
 TIMEOUT 2 >nul
 GOTO FWPATCH
@@ -2708,7 +2712,7 @@ ECHO  Aircraft: %AC%
 ECHO  Firmware File: %FILENAME%
 ECHO  Firmware Version: %VERSION%
 ECHO ---------------------------------------------------------
-IF EXIST "tools\%FWNAME%" (
+IF EXIST "tools\Finished_Firmware_Files\%FWNAME%" (
 ECHO.
 ECHO There is already a file named %FWNAME%, cancelling ...
 ECHO.
@@ -2745,11 +2749,16 @@ ECHO  Firmware File: %FILENAME%
 ECHO  Firmware Version: %VERSION%
 ECHO ---------------------------------------------------------
 ECHO.
-ECHO Attempting to rename the fw file to %FWNAME%
+ECHO Attempting to rename the fw file to service file name
 ECHO OFF
 CD tools
 cd Finished_Firmware_Files
+REM BROKEN NEEDS FIXING BUT DOESNT ERROR -_-
+IF "%VERSION%" GEQ  "1.05.00.00" (
 ren %FILENAME2% %FWNAME%
+) ELSE (
+ren %FILENAME2% %FWNAME%
+)
 cd ..
 cd ..
 ECHO.
