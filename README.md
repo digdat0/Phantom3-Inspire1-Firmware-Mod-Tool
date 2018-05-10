@@ -9,11 +9,10 @@ DJI Inspire 1 will come soon ...
 
 To use .. download the two files, put in same folder. Run the batch file. You need Java and Python installed.
 
-![Screenshot](https://i.imgur.com/yLAkdRZ.png)
-
-![Screenshot1](https://i.imgur.com/uex5GAu.png)
-
-![Screenshot2](https://i.imgur.com/lb45bOH.png)
+![Screenshot](https://i.imgur.com/umY3uBy.png)
+![Screenshot1](https://i.imgur.com/oX7pI8j.png)
+![Screenshot1](https://i.imgur.com/WbTnAle.png)
+![Screenshot2](https://i.imgur.com/pHbVBSh.png)
 
 #credits
 Credits to mefistotelis for the awesome p3 tools https://github.com/o-gs/dji-firmware-tools/issues/32
