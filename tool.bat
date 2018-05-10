@@ -2426,9 +2426,9 @@ ECHO.
 ECHO ---------------------------------------------------------
 ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
-ECHO  Aircraft: %AC%
-ECHO  Firmware File: %FILENAME%
-ECHO  Firmware Version: %VERSION%
+ECHO  Aircraft         : %AC%
+ECHO  Firmware File    : %FILENAME%
+ECHO  Firmware Version : %VERSION%
 ECHO ---------------------------------------------------------
 ECHO.
 ECHO  1 - Extract the firmware file
@@ -2461,9 +2461,9 @@ ECHO.
 ECHO ---------------------------------------------------------
 ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
-ECHO  Aircraft: %AC%
-ECHO  Firmware File: %FILENAME%
-ECHO  Firmware Version: %VERSION%
+ECHO  Aircraft         : %AC%
+ECHO  Firmware File    : %FILENAME%
+ECHO  Firmware Version : %VERSION%
 ECHO ---------------------------------------------------------
 IF EXIST "tools\dji_fwcon.py" (
 GOTO EXTRACTFW1
@@ -2482,9 +2482,9 @@ ECHO.
 ECHO ---------------------------------------------------------
 ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
-ECHO  Aircraft: %AC%
-ECHO  Firmware File: %FILENAME%
-ECHO  Firmware Version: %VERSION%
+ECHO  Aircraft         : %AC%
+ECHO  Firmware File    : %FILENAME%
+ECHO  Firmware Version : %VERSION%
 ECHO ---------------------------------------------------------
 ECHO.
 ECHO Attempting to extract the file you downloaded
@@ -2508,9 +2508,9 @@ ECHO.
 ECHO ---------------------------------------------------------
 ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
-ECHO  Aircraft: %AC%
-ECHO  Firmware File: %FILENAME%
-ECHO  Firmware Version: %VERSION%
+ECHO  Aircraft         : %AC%
+ECHO  Firmware File    : %FILENAME%
+ECHO  Firmware Version : %VERSION%
 ECHO ---------------------------------------------------------
 IF EXIST "tools\fw\%FILENAME2%" (
 GOTO EXTRACTFC1
@@ -2527,9 +2527,9 @@ ECHO.
 ECHO ---------------------------------------------------------
 ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
-ECHO  Aircraft: %AC%
-ECHO  Firmware File: %FILENAME%
-ECHO  Firmware Version: %VERSION%
+ECHO  Aircraft         : %AC%
+ECHO  Firmware File    : %FILENAME%
+ECHO  Firmware Version : %VERSION%
 ECHO ---------------------------------------------------------
 IF EXIST "tools\dji_flyc_param_ed.py" (
 GOTO EXTRACTFC2
@@ -2548,9 +2548,9 @@ ECHO.
 ECHO ---------------------------------------------------------
 ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
-ECHO  Aircraft: %AC%
-ECHO  Firmware File: %FILENAME%
-ECHO  Firmware Version: %VERSION%
+ECHO  Aircraft         : %AC%
+ECHO  Firmware File    : %FILENAME%
+ECHO  Firmware Version : %VERSION%
 ECHO ---------------------------------------------------------
 ECHO.
 ECHO Attempting to extract the flight controller file 
@@ -2572,9 +2572,9 @@ ECHO.
 ECHO ---------------------------------------------------------
 ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
-ECHO  Aircraft: %AC%
-ECHO  Firmware File: %FILENAME%
-ECHO  Firmware Version: %VERSION%
+ECHO  Aircraft         : %AC%
+ECHO  Firmware File    : %FILENAME%
+ECHO  Firmware Version : %VERSION%
 ECHO ---------------------------------------------------------
 IF EXIST "tools\fw\%FILENAME2%" (
 GOTO COMPILE2
@@ -2591,9 +2591,9 @@ ECHO.
 ECHO ---------------------------------------------------------
 ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
-ECHO  Aircraft: %AC%
-ECHO  Firmware File: %FILENAME%
-ECHO  Firmware Version: %VERSION%
+ECHO  Aircraft         : %AC%
+ECHO  Firmware File    : %FILENAME%
+ECHO  Firmware Version : %VERSION%
 ECHO ---------------------------------------------------------
 ECHO.
 ECHO Attempting to re-compile flight controller module
@@ -2617,9 +2617,9 @@ ECHO.
 ECHO ---------------------------------------------------------
 ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
-ECHO  Aircraft: %AC%
-ECHO  Firmware File: %FILENAME%
-ECHO  Firmware Version: %VERSION%
+ECHO  Aircraft         : %AC%
+ECHO  Firmware File    : %FILENAME%
+ECHO  Firmware Version : %VERSION%
 ECHO ---------------------------------------------------------
 ECHO.
 ECHO Attempting to cleanup all the extracted files
@@ -2646,9 +2646,9 @@ ECHO.
 ECHO ---------------------------------------------------------
 ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
-ECHO  Aircraft: %AC%
-ECHO  Firmware File: %FILENAME%
-ECHO  Firmware Version: %VERSION%
+ECHO  Aircraft         : %AC%
+ECHO  Firmware File    : %FILENAME%
+ECHO  Firmware Version : %VERSION%
 ECHO ---------------------------------------------------------
 IF EXIST "tools\fw\%PARAMFILE%" (
 GOTO EDIT1
@@ -2673,9 +2673,9 @@ ECHO.
 ECHO ---------------------------------------------------------
 ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
-ECHO  Aircraft: %AC%
-ECHO  Firmware File: %FILENAME%
-ECHO  Firmware Version: %VERSION%
+ECHO  Aircraft         : %AC%
+ECHO  Firmware File    : %FILENAME%
+ECHO  Firmware Version : %VERSION%
 ECHO ---------------------------------------------------------
 ECHO.
 ECHO  1 - Remove height limit 
@@ -2708,9 +2708,9 @@ ECHO.
 ECHO ---------------------------------------------------------
 ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
-ECHO  Aircraft: %AC%
-ECHO  Firmware File: %FILENAME%
-ECHO  Firmware Version: %VERSION%
+ECHO  Aircraft         : %AC%
+ECHO  Firmware File    : %FILENAME%
+ECHO  Firmware Version : %VERSION%
 ECHO ---------------------------------------------------------
 IF EXIST "tools\Finished_Firmware_Files\%FWNAME%" (
 ECHO.
@@ -2725,9 +2725,9 @@ ECHO.
 ECHO ---------------------------------------------------------
 ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
-ECHO  Aircraft: %AC%
-ECHO  Firmware File: %FILENAME%
-ECHO  Firmware Version: %VERSION%
+ECHO  Aircraft         : %AC%
+ECHO  Firmware File    : %FILENAME%
+ECHO  Firmware Version : %VERSION%
 ECHO ---------------------------------------------------------
 IF EXIST "tools\Finished_Firmware_Files\%FILENAME2%" (
 GOTO RENAMEFW2
@@ -2744,9 +2744,9 @@ ECHO.
 ECHO ---------------------------------------------------------
 ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
-ECHO  Aircraft: %AC%
-ECHO  Firmware File: %FILENAME%
-ECHO  Firmware Version: %VERSION%
+ECHO  Aircraft         : %AC%
+ECHO  Firmware File    : %FILENAME%
+ECHO  Firmware Version : %VERSION%
 ECHO ---------------------------------------------------------
 ECHO.
 ECHO Attempting to rename the fw file to service file name
@@ -2771,9 +2771,9 @@ ECHO.
 ECHO ---------------------------------------------------------
 ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
-ECHO  Aircraft: %AC%
-ECHO  Firmware File: %FILENAME%
-ECHO  Firmware Version: %VERSION%
+ECHO  Aircraft         : %AC%
+ECHO  Firmware File    : %FILENAME%
+ECHO  Firmware Version : %VERSION%
 ECHO ---------------------------------------------------------
 ECHO.
 ECHO Attempting to make %AC% debug file
@@ -2791,9 +2791,9 @@ ECHO.
 ECHO ---------------------------------------------------------
 ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
-ECHO  Aircraft: %AC%
-ECHO  Firmware File: %FILENAME%
-ECHO  Firmware Version: %VERSION%
+ECHO  Aircraft         : %AC%
+ECHO  Firmware File    : %FILENAME%
+ECHO  Firmware Version : %VERSION%
 ECHO ---------------------------------------------------------
 echo.
 echo You don't have Python installed. Goto python.org
