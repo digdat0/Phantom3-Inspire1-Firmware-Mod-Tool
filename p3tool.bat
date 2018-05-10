@@ -4,8 +4,14 @@ REM I'm not a programmer guys
 REM Credits to mefistotelis for the awesome p3 tools
 REM Credit to binary, i borrowed some stuff from your apk batch files
 REM Credit to cs2000 for file hosting (check out dank downloader tool)
-REM Credit to java dudes, I'll add a GPL or needed to use download.jar
+REM Credit to java dudes, I'll add a GPL or needed license to use download.jar
 REM Thanks to DJI for pushing content on GitHub
+REM
+REM BUGS: It doesnt recognize version to rename the service file if early version then install will fail, need to change that
+REM BUGS: Sometimes if you move in fw patch screen from older to newer, it will error on donwload but still download
+REM
+REM
+REM
 REM
 ECHO OFF
 CLS
@@ -19,25 +25,27 @@ javac -version >nul 2>&1 && ( GOTO:MENU
  exit )
 :MENU
 CLS
-SET APPVER=1.0
-SET FWNAME=PMCAPPFw3.bin
+SET APPVER=1.1
+SET ORIGDATE=May 8, 2018
+SET SAVEDATE=%DATE%
 SET PARAMFILE=flyc_param_infos
 ECHO.
 ECHO ---------------------------------------------------------
-ECHO  Phantom 3 Firmware Mod Tool %APPVER%
+ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
 ECHO  Select your aircraft
 ECHO ---------------------------------------------------------
 ECHO.
-ECHO  1 - Phantom 3 Professional
-ECHO  2 - Phantom 3 Advanced
-ECHO  3 - Phantom 3 Standard
-ECHO  4 - Phantom 3 4k
-ECHO  5 - Phantom 3 SE
-ECHO  6 - Inspire 1 v1 (WM610)
-ECHO  7 - Inspire 1 Pro (WM610_FC350)
-ECHO  8 - Inspire 1 Pro (WM610_FC550)
+ECHO  1 - Phantom 3 Professional   (P3X)
+ECHO  2 - Phantom 3 Advanced       (P3S)
+ECHO  3 - Phantom 3 Standard       (P3C)
+ECHO  4 - Phantom 3 4k             (P3XW)
+ECHO  5 - Phantom 3 SE             (P3SE)
+ECHO  6 - Inspire 1 v1             (WM610)
+ECHO  7 - Inspire 1 Pro            (WM610_FC350)
+ECHO  8 - Inspire 1 Pro RAW        (WM610_FC550)
 ECHO.
+ECHO  A - About
 ECHO  Q - Quit
 ECHO.
 SET /P M=Chose and press ENTER: 
@@ -49,6 +57,8 @@ IF %M%==5 GOTO P3SE
 IF %M%==6 GOTO INSPIRE1v1
 IF %M%==7 GOTO INSPIRE1350
 IF %M%==8 GOTO INSPIRE1550
+IF %M%==a GOTO ABOOT
+IF %M%==A GOTO ABOOT
 IF %M%==Q GOTO EOF
 IF %M%==q GOTO EOF
 GOTO MENU
@@ -56,9 +66,10 @@ GOTO MENU
 CLS
 SET AC=Phantom 3 Professional
 SET DEBUGNAME=P3X_FW_DEBUG
+SET FWNAME=PMCAPPFw3.bin
 ECHO.
 ECHO ---------------------------------------------------------
-ECHO  Phantom 3 Firmware Mod Tool %APPVER%
+ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
 ECHO  Select your %AC% version
 ECHO ---------------------------------------------------------
@@ -298,9 +309,10 @@ GOTO FWPATCH
 CLS
 SET AC=Phantom 3 Advanced
 SET DEBUGNAME=P3S_FW_DEBUG
+SET FWNAME=PMCAPPFw3.bin
 ECHO.
 ECHO ---------------------------------------------------------
-ECHO  Phantom 3 Firmware Mod Tool %APPVER%
+ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
 ECHO  Select your %AC% firwmare version
 ECHO ---------------------------------------------------------
@@ -625,9 +637,10 @@ GOTO FWPATCH
 CLS
 SET AC=Phantom 3 Standard
 SET DEBUGNAME=P3C_FW_DEBUG
+SET FWNAME=PMCAPPFw3.bin
 ECHO.
 ECHO ---------------------------------------------------------
-ECHO  Phantom 3 Firmware Mod Tool %APPVER%
+ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
 ECHO  Select your %AC% version
 ECHO ---------------------------------------------------------
@@ -1002,9 +1015,10 @@ GOTO FWPATCH
 CLS
 SET AC=Phantom 3 4k
 SET DEBUGNAME=P3XW_FW_DEBUG
+SET FWNAME=PMCAPPFw3.bin
 ECHO.
 ECHO ---------------------------------------------------------
-ECHO  Phantom 3 Firmware Mod Tool %APPVER%
+ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
 ECHO  Select your %AC% version
 ECHO ---------------------------------------------------------
@@ -1227,9 +1241,10 @@ GOTO FWPATCH
 CLS
 SET AC=Phantom 3 SE
 SET DEBUGNAME=P3SE_FW_DEBUG
+SET FWNAME=PMCAPPFw3.bin
 ECHO.
 ECHO ---------------------------------------------------------
-ECHO  Phantom 3 Firmware Mod Tool %APPVER%
+ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
 ECHO  Select your %AC% version
 ECHO ---------------------------------------------------------
@@ -1566,18 +1581,844 @@ ECHO File Download Finished, lets patch ..
 timeout 2 >nul
 GOTO FWPATCH
 :INSPIRE1v1
+CLS
+SET AC=Inspire 1 v1
+SET DEBUGNAME=WM610_FW_DEBUG
+SET FWNAME=INCAPPFw3.bin
+ECHO.
+ECHO ---------------------------------------------------------
+ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
+ECHO ---------------------------------------------------------
+ECHO  Select your %AC% version
+ECHO ---------------------------------------------------------
+ECHO.
+ECHO  1   - Version 1.00.00.11
+ECHO  2   - Version 1.00.00.12
+ECHO  3   - Version 1.00.00.30
+ECHO  4   - Version 1.00.00.13 
+ECHO  5   - Version 1.00.01.01
+ECHO  6   - Version 1.01.00.40
+ECHO  7   - Version 1.02.00.13
+ECHO  8   - Version 1.02.00.14
+ECHO  9   - Version 1.02.00.16
+ECHO  10  - Version 1.02.00.17
+ECHO  11  - Version 1.02.00.50
+ECHO  12  - Version 1.02.01.00
+ECHO  13  - Version 1.02.01.03
+ECHO  14  - Version 1.02.01.06
+ECHO  15  - Version 1.02.02.18
+ECHO  16  - Version 1.03.00.00
+ECHO  17  - Version 1.03.00.60
+ECHO  18  - Version 1.04.00.01
+ECHO  19  - Version 1.04.00.10
+ECHO  20  - Version 1.04.00.63
+ECHO  21  - Version 1.04.00.70
+ECHO  22  - Version 1.05.00.30
+ECHO  23  - Version 1.06.00.40
+ECHO  24  - Version 1.07.00.43
+ECHO  25  - Version 1.07.00.90
+ECHO  26  - Version 1.08.00.92
+ECHO  27  - Version 1.08.01.00
+ECHO  28  - Version 1.09.01.10
+ECHO  29  - Version 1.09.01.30
+ECHO  30  - Version 1.10.01.31
+ECHO  31  - Version 1.10.01.40
+ECHO  32  - Version 1.11.01.50
+ECHO.
+ECHO  M - Main menu
+ECHO  Q - Quit
+ECHO.
+SET /P M=Chose and press ENTER: 
+IF %M%==1 GOTO INSP1DL1
+IF %M%==2 GOTO INSP1DL2
+IF %M%==3 GOTO INSP1DL3
+IF %M%==4 GOTO INSP1DL4
+IF %M%==5 GOTO INSP1DL5
+IF %M%==6 GOTO INSP1DL6
+IF %M%==7 GOTO INSP1DL7
+IF %M%==8 GOTO INSP1DL8
+IF %M%==9 GOTO INSP1DL9
+IF %M%==10 GOTO INSP1DL10
+IF %M%==11 GOTO INSP1DL11
+IF %M%==12 GOTO INSP1DL12
+IF %M%==13 GOTO INSP1DL13
+IF %M%==14 GOTO INSP1DL14
+IF %M%==15 GOTO INSP1DL15
+IF %M%==16 GOTO INSP1DL16
+IF %M%==17 GOTO INSP1DL17
+IF %M%==18 GOTO INSP1DL18
+IF %M%==19 GOTO INSP1DL19
+IF %M%==20 GOTO INSP1DL20
+IF %M%==21 GOTO INSP1DL21
+IF %M%==22 GOTO INSP1DL22
+IF %M%==23 GOTO INSP1DL23
+IF %M%==24 GOTO INSP1DL24
+IF %M%==25 GOTO INSP1DL25
+IF %M%==26 GOTO INSP1DL26
+IF %M%==27 GOTO INSP1DL27
+IF %M%==28 GOTO INSP1DL28
+IF %M%==29 GOTO INSP1DL29
+IF %M%==30 GOTO INSP1DL30
+IF %M%==31 GOTO INSP1DL31
+IF %M%==32 GOTO INSP1DL32
+IF %M%==Q GOTO EOF
+IF %M%==q GOTO EOF
+IF %M%==M GOTO MENU
+IF %M%==m GOTO MENU
 GOTO MENU
+:INSP1DL1
+SET FILENAME=WM610_v01.00.00.11.bin
+SET FILENAME2=WM610_v01.00.00.11_m0306.bin
+SET VERSION=1.00.00.11
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1/V01.00.00.11_AC.bin" WM610_v01.00.00.11.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1DL2
+SET FILENAME=WM610_v01.00.00.12.bin
+SET FILENAME2=WM610_v01.00.00.12_m0306.bin
+SET VERSION=1.00.00.12
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1/V01.00.00.12_AC.bin" WM610_v01.00.00.12.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1DL3
+SET FILENAME=WM610_v01.00.00.30.bin
+SET FILENAME2=WM610_v01.00.00.30_m0306.bin
+SET VERSION=1.00.00.30
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1/V01.00.00.30_AC.bin" WM610_v01.00.00.30.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1DL4
+SET FILENAME=WM610_v01.00.0013.bin 
+SET FILENAME2=WM610_v01.00.0013_m0306.bin
+SET VERSION=
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1/V01.00.0013_AC.bin" WM610_v01.00.0013.bin 
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1DL5
+SET FILENAME=WM610_v01.00.01.01.bin
+SET FILENAME2=WM610_v01.00.01.01_m0306.bin
+SET VERSION=1.00.01.01
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1/V01.00.01.01_AC.bin" WM610_v01.00.01.01.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1DL6
+SET FILENAME=WM610_v01.01.00.40.bin 
+SET FILENAME2=WM610_v01.01.00.40_m0306.bin
+SET VERSION=1.01.00.40
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1/V01.01.00.40_AC.bin" WM610_v01.01.00.40.bin 
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1DL7
+SET FILENAME=WM610_v01.02.00.13.bin
+SET FILENAME2=WM610_v01.02.00.13_m0306.bin
+SET VERSION=1.02.00.13
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1/V01.02.00.13_AC.bin" WM610_v01.02.00.13.bin 
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1DL8
+SET FILENAME=WM610_v01.02.00.14.bin
+SET FILENAME2=WM610_v01.02.00.14_m0306.bin
+SET VERSION=
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1/V01.02.00.14_AC.bin" WM610_v01.02.00.14.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1DL9
+SET FILENAME=WM610_v01.02.00.16.bin
+SET FILENAME2=WM610_v01.02.00.16_m0306.bin
+SET VERSION=1.02.00.16
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1/V01.02.00.16_AC.bin" WM610_v01.02.00.16.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1DL10
+SET FILENAME=WM610_v01.02.00.17.bin 
+SET FILENAME2=WM610_v01.02.00.17_m0306.bin
+SET VERSION=1.02.00.17
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1/V01.02.00.17_AC.bin" WM610_v01.02.00.17.bin 
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1DL11
+SET FILENAME=WM610_v01.02.00.50.bin
+SET FILENAME2=WM610_v01.02.00.50_m0306.bin
+SET VERSION=1.02.00.50
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1/V01.02.00.50_AC.bin" WM610_v01.02.00.50.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1DL12
+SET FILENAME=WM610_v01.02.01.00.bin
+SET FILENAME2=WM610_v01.02.01.00_m0306.bin
+SET VERSION=1.02.01.00
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1/V01.02.01.00_AC.bin" WM610_v01.02.01.00.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1DL13
+SET FILENAME=WM610_v01.02.01.03.bin
+SET FILENAME2=WM610_v01.02.01.03_m0306.bin
+SET VERSION=1.02.01.03
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1/V01.02.01.03_AC.bin" WM610_v01.02.01.03.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1DL14
+SET FILENAME=WM610_v01.02.01.06.bin 
+SET FILENAME2=WM610_v01.02.01.06_m0306.bin
+SET VERSION=1.02.01.06
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1/V01.02.01.06_AC.bin" WM610_v01.02.01.06.bin 
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1DL15
+SET FILENAME=WM610_v01.02.02.18.bin 
+SET FILENAME2=WM610_v01.02.02.18_m0306.bin
+SET VERSION=1.02.02.18
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1/V01.02.02.18_AC.bin" WM610_v01.02.02.18.bin 
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1DL16
+SET FILENAME=WM610_v01.03.00.00.bin
+SET FILENAME2=WM610_v01.03.00.00_m0306.bin
+SET VERSION=1.03.00.00
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1/V01.03.00.00_AC.bin" WM610_v01.03.00.00.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1DL17
+SET FILENAME=WM610_v01.03.00.60.bin
+SET FILENAME2=WM610_v01.03.00.60_m0306.bin
+SET VERSION=1.03.00.60
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1/V01.03.00.60_AC.bin" WM610_v01.03.00.60.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1DL18
+SET FILENAME=WM610_v01.04.00.01.bin
+SET FILENAME2=WM610_v01.04.00.01_m0306.bin
+SET VERSION=1.04.00.01
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1/V01.04.00.01_AC.bin" WM610_v01.04.00.01.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1DL19
+SET FILENAME=WM610_v01.04.00.10.bin 
+SET FILENAME2=WM610_v01.04.00.10_m0306.bin
+SET VERSION=1.04.00.10
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1/V01.04.00.10_AC.bin" WM610_v01.04.00.10.bin 
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1DL20
+SET FILENAME=WM610_v01.04.00.63.bin
+SET FILENAME2=WM610_v01.04.00.63_m0306.bin
+SET VERSION=1.04.00.63
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1/V01.04.00.63_AC.bin" WM610_v01.04.00.63.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1DL21
+SET FILENAME=WM610_v01.04.00.70.bin
+SET FILENAME2=WM610_v01.04.00.70_m0306.bin
+SET VERSION=1.04.00.70
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1/V01.04.00.70_AC.bin" WM610_v01.04.00.70.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1DL22
+SET FILENAME=WM610_v01.05.00.30.bin
+SET FILENAME2=WM610_v01.05.00.30_m0306.bin
+SET VERSION=1.05.00.30
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1/V01.05.00.30_AC.bin" WM610_v01.05.00.30.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1DL23
+SET FILENAME=WM610_v01.06.00.40.bin
+SET FILENAME2=WM610_v01.06.00.40_m0306.bin
+SET VERSION=1.06.00.40
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1/V01.06.00.40_AC.bin" WM610_v01.06.00.40.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1DL24
+SET FILENAME=WM610_v01.07.00.43.bin
+SET FILENAME2=WM610_v01.07.00.43_m0306.bin
+SET VERSION=1.07.00.43
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1/V01.07.00.43_AC.bin" WM610_v01.07.00.43.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1DL25
+SET FILENAME=WM610_v01.07.00.90.bin
+SET FILENAME2=WM610_v01.07.00.90_m0306.bin
+SET VERSION=1.07.00.90
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1/V01.07.00.90_AC.bin" WM610_v01.07.00.90.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1DL26
+SET FILENAME=WM610_v01.08.00.92.bin
+SET FILENAME2=WM610_v01.08.00.92_m0306.bin
+SET VERSION=1.08.00.92
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1/V01.08.00.92_AC.bin" WM610_v01.08.00.92.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1DL27
+SET FILENAME=WM610_v01.08.01.00.bin
+SET FILENAME2=WM610_v01.08.01.00_m0306.bin
+SET VERSION=1.08.01.00
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1/V01.08.01.00_AC.bin" WM610_v01.08.01.00.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1DL28
+SET FILENAME=WM610_v01.09.01.10.bin
+SET FILENAME2=WM610_v01.09.01.10_m0306.bin
+SET VERSION=1.09.01.10
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1/V01.09.01.10_AC.bin" WM610_v01.09.01.10.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1DL29
+SET FILENAME=WM610_v01.09.01.30.bin 
+SET FILENAME2=WM610_v01.09.01.30_m0306.bin
+SET VERSION=1.09.01.30
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1/V01.09.01.30_AC.bin" WM610_v01.09.01.30.bin 
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1DL30
+SET FILENAME=WM610_v01.10.01.31.bin
+SET FILENAME2=WM610_v01.10.01.31_m0306.bin
+SET VERSION=1.10.01.31
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1/V01.10.01.31_AC.bin" WM610_v01.10.01.31.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1DL31
+SET FILENAME=WM610_v01.10.01.40.bin
+SET FILENAME2=WM610_v01.10.01.40_m0306.bin
+SET VERSION=1.10.01.40
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1/V01.10.01.40_AC.bin" WM610_v01.10.01.40.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1DL32
+SET FILENAME=WM610_v01.11.01.50.bin
+SET FILENAME2=WM610_v01.11.01.50_m0306.bin
+SET VERSION=1.11.01.50
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1/V01.11.01.50_AC.bin" WM610_v01.11.01.50.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
 :INSPIRE1350
+CLS
+SET AC=Inspire 1 Pro (WM610_FC350)
+SET DEBUGNAME=WM610_FC350_FW_DEBUG
+SET FWNAME=INCAPPFw3.bin
+ECHO.
+ECHO ---------------------------------------------------------
+ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
+ECHO ---------------------------------------------------------
+ECHO  Select your %AC% version
+ECHO ---------------------------------------------------------
+ECHO.
+ECHO  1  - Version 1.09.01.40
+ECHO  2  - Version 1.10.01.40
+ECHO  3  - Version 1.11.01.50
+ECHO.
+ECHO  M - Main menu
+ECHO  Q - Quit
+ECHO.
+SET /P M=Chose and press ENTER: 
+IF %M%==1 GOTO INSP1350DL1
+IF %M%==2 GOTO INSP1350DL2
+IF %M%==3 GOTO INSP1350DL3
+IF %M%==Q GOTO EOF
+IF %M%==q GOTO EOF
+IF %M%==M GOTO MENU
+IF %M%==m GOTO MENU
 GOTO MENU
+:INSP1350DL1
+SET FILENAME=WM610_FC350Z_FW_V01.09.01.40.bin
+SET FILENAME2=WM610_FC350Z_FW_V01.09.01.40_m0306.bin
+SET VERSION=1.09.01.40
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1 Pro/WM610_FC350Z_FW_V01.09.01.40.bin" WM610_FC350Z_FW_V01.09.01.40.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1350DL2
+SET FILENAME=WM610_FC350Z_FW_V01.10.01.40.bin	
+SET FILENAME2=WM610_FC350Z_FW_V01.10.01.40_m0306.bin
+SET VERSION=1.10.01.40
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1 Pro/WM610_FC350Z_FW_V01.10.01.40.bin" WM610_FC350Z_FW_V01.10.01.40.bin 
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1350DL3
+SET FILENAME=WM610_FC350Z_FW_V01.11.01.50.bin	
+SET FILENAME2=WM610_FC350Z_FW_V01.11.01.50_m0306.bin
+SET VERSION=1.11.01.50
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1 Pro/WM610_FC350Z_FW_V01.11.01.50.bin" WM610_FC350Z_FW_V01.11.01.50.bin	
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
 :INSPIRE1550
+CLS
+SET AC=Inspire 1 Pro and RAW (WM610_FC550)
+SET DEBUGNAME=WM610_FC550_FW_DEBUG
+SET FWNAME=INCAPPFw3.bin
+ECHO.
+ECHO ---------------------------------------------------------
+ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
+ECHO ---------------------------------------------------------
+ECHO  Select your %AC% version
+ECHO ---------------------------------------------------------
+ECHO.
+ECHO  1   - Version 1.00.00.30
+ECHO  2   - Version 1.01.00.40
+ECHO  3   - Version 1.02.00.50
+ECHO  4   - Version 1.03.00.60
+ECHO  5   - Version 1.04.00.70
+ECHO  6   - Version 1.08.01.00
+ECHO  7   - Version 1.09.01.10 RAW
+ECHO  8   - Version 1.09.01.30 RAW
+ECHO  9   - Version 1.10.01.40
+ECHO  10  - Version 1.11.01.50
+ECHO.
+ECHO  M - Main menu
+ECHO  Q - Quit
+ECHO.
+SET /P M=Chose and press ENTER: 
+IF %M%==1 GOTO INSP1550DL1
+IF %M%==2 GOTO INSP1550DL2
+IF %M%==3 GOTO INSP1550DL3
+IF %M%==4 GOTO INSP1550DL4
+IF %M%==5 GOTO INSP1550DL5
+IF %M%==6 GOTO INSP1550DL6
+IF %M%==7 GOTO INSP1550DL7
+IF %M%==8 GOTO INSP1550DL8
+IF %M%==9 GOTO INSP1550DL9
+IF %M%==10 GOTO INSP1550DL10
+IF %M%==Q GOTO EOF
+IF %M%==q GOTO EOF
+IF %M%==M GOTO MENU
+IF %M%==m GOTO MENU
 GOTO MENU
+:INSP1550DL1
+SET FILENAME=WM610_FC550_FW_V01.00.00.30.bin
+SET FILENAME2=WM610_FC550_FW_V01.00.00.30_m0306.bin
+SET VERSION=1.00.00.30
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+pause
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1 Pro/WM610_FC550_FW_V01.00.00.30.bin" WM610_FC550_FW_V01.00.00.30.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1550DL2
+SET FILENAME=WM610_FC550_FW_V01.01.00.40.bin
+SET FILENAME2=WM610_FC550_FW_V01.01.00.40_m0306.bin
+SET VERSION=1.01.00.40
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1 Pro/WM610_FC550_FW_V01.01.00.40.bin" WM610_FC550_FW_V01.01.00.40.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1550DL3
+SET FILENAME=WM610_FC550_FW_V01.02.00.50.bin
+SET FILENAME2=WM610_FC550_FW_V01.02.00.50_m0306.bin
+SET VERSION=1.02.00.50
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1 Pro/WM610_FC550_FW_V01.02.00.50.bin" WM610_FC550_FW_V01.02.00.50.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1550DL4
+SET FILENAME=WM610_FC550_FW_V01.03.00.60.bin
+SET FILENAME2=WM610_FC550_FW_V01.03.00.60_m0306.bin
+SET VERSION=1.03.00.60
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1 Pro/WM610_FC550_FW_V01.03.00.60.bin" WM610_FC550_FW_V01.03.00.60.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1550DL5
+SET FILENAME=WM610_FC550_FW_V01.04.00.70.bin
+SET FILENAME2=WM610_FC550_FW_V01.04.00.70_m0306.bin
+SET VERSION=1.04.00.70
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1 Pro/WM610_FC550_FW_V01.04.00.70.bin" WM610_FC550_FW_V01.04.00.70.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1550DL6
+SET FILENAME=WM610_FC550_FW_V01.08.01.00.bin
+SET FILENAME2=WM610_FC550_FW_V01.08.01.00_m0306.bin
+SET VERSION=1.08.01.00
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1 Pro/WM610_FC550_FW_V01.08.01.00.bin" WM610_FC550_FW_V01.08.01.00.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1550DL7
+SET FILENAME=WM610_FC550R_FW_V01.09.01.10.bin
+SET FILENAME2=WM610_FC550R_FW_V01.09.01.10_m0306.bin
+SET VERSION=1.09.01.10
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1 Pro/WM610_FC550R_FW_V01.09.01.10.bin" WM610_FC550R_FW_V01.09.01.10.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1550DL8
+SET FILENAME=WM610_FC550R_FW_V01.09.01.30.bin
+SET FILENAME2=WM610_FC550R_FW_V01.09.01.30_m0306.bin
+SET VERSION=1.09.01.3040
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1 Pro/WM610_FC550R_FW_V01.09.01.30.bin" WM610_FC550R_FW_V01.09.01.30.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1550DL9
+SET FILENAME=WM610_FC550_FW_V01.10.01.40.bin
+SET FILENAME2=WM610_FC550_FW_V01.10.01.40_m0306.bin
+SET VERSION=1.10.01.40
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1 Pro/WM610_FC550_FW_V01.10.01.40.bin" WM610_FC550_FW_V01.10.01.40.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
+:INSP1550DL10
+SET FILENAME=WM610_FC550_FW_V01.11.01.50.bin
+SET FILENAME2=WM610_FC550_FW_V01.11.01.50_m0306.bin
+SET VERSION=1.11.01.50
+IF EXIST "tools\%FILENAME%" (
+GOTO FWPATCH 
+) ELSE (
+ECHO.
+ECHO Downloading firmware, please wait .. 
+ECHO.
+java -jar download.jar "http://dji.polybotes.feralhosting.com/DJI-Firmware/BIN/Inspire 1 Pro/WM610_FC550_FW_V01.11.01.50.bin" WM610_FC550_FW_V01.11.01.50.bin
+)
+ECHO File Download Finished, lets patch ..
+timeout 2 >nul
+GOTO FWPATCH
 :FWPATCH
 python --version 2>NUL
 if errorlevel 1 goto errorNoPython
 CLS
 ECHO.
 ECHO ---------------------------------------------------------
-ECHO  Phantom 3 Firmware Mod Tool %APPVER%
+ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
 ECHO  Aircraft: %AC%
 ECHO  Firmware File: %FILENAME%
@@ -1612,7 +2453,7 @@ GOTO FWPATCH
 CLS
 ECHO.
 ECHO ---------------------------------------------------------
-ECHO  Phantom 3 Firmware Mod Tool %APPVER%
+ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
 ECHO  Aircraft: %AC%
 ECHO  Firmware File: %FILENAME%
@@ -1633,7 +2474,7 @@ GOTO EXTRACTFW1
 CLS
 ECHO.
 ECHO ---------------------------------------------------------
-ECHO  Phantom 3 Firmware Mod Tool %APPVER%
+ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
 ECHO  Aircraft: %AC%
 ECHO  Firmware File: %FILENAME%
@@ -1644,6 +2485,7 @@ ECHO Attempting to extract the file you downloaded
 ECHO OFF
 CD tools
 md fw
+md Finished_Firmware_Files
 copy %FILENAME% fw
 copy dji_fwcon.py fw
 CD fw
@@ -1658,7 +2500,7 @@ GOTO FWPATCH
 CLS
 ECHO.
 ECHO ---------------------------------------------------------
-ECHO  Phantom 3 Firmware Mod Tool %APPVER%
+ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
 ECHO  Aircraft: %AC%
 ECHO  Firmware File: %FILENAME%
@@ -1677,7 +2519,7 @@ GOTO FWPATCH
 CLS
 ECHO.
 ECHO ---------------------------------------------------------
-ECHO  Phantom 3 Firmware Mod Tool %APPVER%
+ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
 ECHO  Aircraft: %AC%
 ECHO  Firmware File: %FILENAME%
@@ -1698,7 +2540,7 @@ GOTO EXTRACTFC2
 CLS
 ECHO.
 ECHO ---------------------------------------------------------
-ECHO  Phantom 3 Firmware Mod Tool %APPVER%
+ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
 ECHO  Aircraft: %AC%
 ECHO  Firmware File: %FILENAME%
@@ -1722,7 +2564,7 @@ GOTO FWPATCH
 CLS
 ECHO.
 ECHO ---------------------------------------------------------
-ECHO  Phantom 3 Firmware Mod Tool %APPVER%
+ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
 ECHO  Aircraft: %AC%
 ECHO  Firmware File: %FILENAME%
@@ -1741,7 +2583,7 @@ GOTO FWPATCH
 CLS
 ECHO.
 ECHO ---------------------------------------------------------
-ECHO  Phantom 3 Firmware Mod Tool %APPVER%
+ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
 ECHO  Aircraft: %AC%
 ECHO  Firmware File: %FILENAME%
@@ -1757,6 +2599,10 @@ python dji_flyc_param_ed.py -vv -u -m %FILENAME2%
 copy %FILENAME2% ..
 copy %PARAMFILE% ..
 cd..
+copy %FILENAME2% Finished_Firmware_Files
+copy %PARAMFILE% Finished_Firmware_Files
+del %FILENAME2%
+del %PARAMFILE%
 cd..
 ECHO Compiled new flight controller module successfully
 TIMEOUT 2 >nul
@@ -1765,7 +2611,7 @@ GOTO FWPATCH
 CLS
 ECHO.
 ECHO ---------------------------------------------------------
-ECHO  Phantom 3 Firmware Mod Tool %APPVER%
+ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
 ECHO  Aircraft: %AC%
 ECHO  Firmware File: %FILENAME%
@@ -1781,6 +2627,8 @@ del *.bin
 del *.py
 del %PARAMFILE%
 cd ..
+del *.py
+REM del %FILENAME% testing this sucks as it requires download everytime, real version may be okay
 rd fw
 cd ..
 SET CLEAN=YES
@@ -1792,7 +2640,7 @@ GOTO FWPATCH
 CLS
 ECHO.
 ECHO ---------------------------------------------------------
-ECHO  Phantom 3 Firmware Mod Tool %APPVER%
+ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
 ECHO  Aircraft: %AC%
 ECHO  Firmware File: %FILENAME%
@@ -1815,11 +2663,46 @@ notepad.exe flyc_param_infos
 cd ..
 cd..
 GOTO FWPATCH
+:MODPARAMS
+CLS
+ECHO.
+ECHO ---------------------------------------------------------
+ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
+ECHO ---------------------------------------------------------
+ECHO  Aircraft: %AC%
+ECHO  Firmware File: %FILENAME%
+ECHO  Firmware Version: %VERSION%
+ECHO ---------------------------------------------------------
+ECHO.
+ECHO  1 - Remove height limit 
+ECHO  2 - Change horizontal tilt angle
+ECHO  3 - Change vertical ascent velocity
+ECHO  4 - Change vertical descent velocity
+ECHO  5 - Remove flight area restrictions
+ECHO  6 - Remove forced landings (altitude+battery)
+ECHO  7 - Disable drivers license enforcement
+ECHO.
+ECHO  M - Main menu
+ECHO  Q - Quit
+ECHO.
+SET /P M=Chose and press ENTER: 
+IF %M%==1 GOTO HEIGHT
+IF %M%==2 GOTO TILT
+IF %M%==3 GOTO ASCENT
+IF %M%==4 GOTO DESCENT
+IF %M%==5 GOTO FAR
+IF %M%==6 GOTO LANDINGS
+IF %M%==7 GOTO DRIVER
+IF %M%==Q GOTO EOF
+IF %M%==q GOTO EOF
+IF %M%==M GOTO MENU
+IF %M%==m GOTO MENU
+GOTO FWPATCH
 :RENAMEFW
 CLS
 ECHO.
 ECHO ---------------------------------------------------------
-ECHO  Phantom 3 Firmware Mod Tool %APPVER%
+ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
 ECHO  Aircraft: %AC%
 ECHO  Firmware File: %FILENAME%
@@ -1827,7 +2710,7 @@ ECHO  Firmware Version: %VERSION%
 ECHO ---------------------------------------------------------
 IF EXIST "tools\%FWNAME%" (
 ECHO.
-ECHO There is already a file named PMCAPPFw3.bin cancelling
+ECHO There is already a file named %FWNAME%, cancelling ...
 ECHO.
 TIMEOUT 2 >nul
 GOTO FWPATCH
@@ -1836,17 +2719,17 @@ GOTO FWPATCH
 CLS
 ECHO.
 ECHO ---------------------------------------------------------
-ECHO  Phantom 3 Firmware Mod Tool %APPVER%
+ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
 ECHO  Aircraft: %AC%
 ECHO  Firmware File: %FILENAME%
 ECHO  Firmware Version: %VERSION%
 ECHO ---------------------------------------------------------
-IF EXIST "tools\%FILENAME2%" (
+IF EXIST "tools\Finished_Firmware_Files\%FILENAME2%" (
 GOTO RENAMEFW2
 ) ELSE (
 ECHO.
-ECHO There is no file to rename, did you re-compile 
+ECHO There is no file to rename, did you re-compile yet ...
 ECHO.
 TIMEOUT 2 >nul
 GOTO FWPATCH
@@ -1855,26 +2738,29 @@ GOTO FWPATCH
 CLS
 ECHO.
 ECHO ---------------------------------------------------------
-ECHO  Phantom 3 Firmware Mod Tool %APPVER%
+ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
 ECHO  Aircraft: %AC%
 ECHO  Firmware File: %FILENAME%
 ECHO  Firmware Version: %VERSION%
 ECHO ---------------------------------------------------------
 ECHO.
-ECHO Attempting to rename the fw file to PMCAPPFw3.bin
+ECHO Attempting to rename the fw file to %FWNAME%
 ECHO OFF
 CD tools
+cd Finished_Firmware_Files
 ren %FILENAME2% %FWNAME%
 cd ..
-ECHO File renamed successfully
-TIMEOUT 2 >nul
+cd ..
+ECHO.
+ECHO File renamed successfully to %FWNAME%
+TIMEOUT 3 >nul
 GOTO FWPATCH
 :MAKEDEBUG
 CLS
 ECHO.
 ECHO ---------------------------------------------------------
-ECHO  Phantom 3 Firmware Mod Tool %APPVER%
+ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
 ECHO  Aircraft: %AC%
 ECHO  Firmware File: %FILENAME%
@@ -1884,16 +2770,17 @@ ECHO.
 ECHO Attempting to make %AC% debug file
 ECHO OFF
 CD tools
+cd Finished_Firmware_Files
 type NUL > %DEBUGNAME%
 ECHO.
-echo Debug file created in the tools folder
+echo Debug file created in the Finished_Firmware_Files folder
 TIMEOUT 2 >nul
 GOTO FWPATCH
 :NOPY
 CLS
 ECHO.
 ECHO ---------------------------------------------------------
-ECHO  Phantom 3 Firmware Mod Tool %APPVER%
+ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
 ECHO ---------------------------------------------------------
 ECHO  Aircraft: %AC%
 ECHO  Firmware File: %FILENAME%
@@ -1902,6 +2789,30 @@ ECHO ---------------------------------------------------------
 echo.
 echo You don't have Python installed. Goto python.org
 TIMEOUT 2 >nul
+GOTO MENU
+:ABOOT
+CLS
+ECHO.
+ECHO ---------------------------------------------------------
+ECHO  Phantom 3 and Inspire 1 Firmware Mod Tool %APPVER%
+ECHO ---------------------------------------------------------
+ECHO  About and Credits
+ECHO ---------------------------------------------------------
+ECHO.
+ECHO  created by digdat0
+ECHO  created on %ORIGDATE%
+ECHO  current version %APPVER%
+ECHO.
+ECHO  #credits
+ECHO  credit to mefistotelis for the Phantom 3 Python tools
+ECHO  credit to binary for download.jar and batch functions
+ECHO  credit to cs2000 for file link hosting
+ECHO  thanks to the community and the OG's
+ECHO  thanks to DJI for using github properly
+ECHO.
+ECHO OFF
+pause
+REM TIMEOUT 10 >nul   # i like pause better here
 GOTO MENU
 :EOF
 EXIT
