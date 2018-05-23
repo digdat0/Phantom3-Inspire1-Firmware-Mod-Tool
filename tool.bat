@@ -2465,13 +2465,13 @@ ECHO  Aircraft         : %AC%
 ECHO  Firmware File    : %FILENAME%
 ECHO  Firmware Version : %VERSION%
 ECHO ---------------------------------------------------------
-IF EXIST "tools\dji_fwcon.py" (
+IF EXIST "tools\dji_xv4_fwcon.py" (
 GOTO EXTRACTFW1
 ) ELSE (
 ECHO.
 ECHO Downloading Python firmware tool, please wait .. 
 ECHO.
-java -jar download.jar https://github.com/o-gs/dji-firmware-tools/raw/master/dji_fwcon.py dji_fwcon.py
+java -jar download.jar https://github.com/o-gs/dji-firmware-tools/raw/master/dji_xv4_fwcon.py dji_xv4_fwcon.py
 )
 ECHO Downloaded Python FW Extract Tool ..
 timeout 2 >nul
@@ -2493,10 +2493,10 @@ CD tools
 md fw
 md Finished_Firmware_Files
 copy %FILENAME% fw
-copy dji_fwcon.py fw
+copy dji_xv4_fwcon.py fw
 CD fw
-python dji_fwcon.py -vv -x -p %FILENAME%
-del dji_fwcon.py
+python dji_xv4_fwcon.py -vv -x -p %FILENAME%
+del dji_xv4_fwcon.py
 cd ..
 cd ..
 ECHO File Extracted Successfully
