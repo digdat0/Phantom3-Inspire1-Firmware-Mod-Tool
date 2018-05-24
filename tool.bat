@@ -7,9 +7,8 @@ REM Credit to cs2000 for file hosting (check out dank downloader tool)
 REM Credit to java dudes, I'll add a GPL or needed license to use download.jar
 REM Thanks to DJI for pushing content on GitHub
 REM
-REM BUGS: It doesnt recognize version to rename the service file if early version then install will fail, need to change that
 REM BUGS: Sometimes if you move in fw patch screen from older to newer, it will error on donwload but still download
-REM
+REM TODO: Add decompile already existing service file
 REM
 REM
 REM
@@ -24,7 +23,7 @@ javac -version >nul 2>&1 && ( GOTO:MENU
   pause
  exit )
 :MENU
-SET APPVER=1.1
+SET APPVER=1.2
 SET ORIGDATE=May 8, 2018
 SET SAVEDATE=%DATE%
 SET PARAMFILE=flyc_param_infos
@@ -2420,7 +2419,7 @@ timeout 2 >nul
 GOTO FWPATCH
 :FWPATCH
 python --version 2>NUL
-if errorlevel 1 goto errorNoPython
+if errorlevel 1 goto NOPY
 CLS
 ECHO.
 ECHO ---------------------------------------------------------
