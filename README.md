@@ -1,4 +1,11 @@
 # Phantom 3 and Inspire 1 Mod Tool
+
+This is a wrapper batch file which uses tools other developrs made. My intention is to make this easier; All credit to mefistotelis for his work. Please review his repo here and please give all credit and or donations to mefistotelis
+
+https://github.com/o-gs/dji-firmware-tools
+
+-------------------------------------------------
+
 A batch file which makes the Phantom 3 and Inspire 1 modding process more user friendly.
 
 You select your aircraft, then your version. If that firmware isn't already downloaded, it downloads it. After download it opens a menu of options. It can extract the firmware, extract the flight controller module, allow you to edit the parameters (hoping to add patching one day), re-compile the flight controller module with updated parameters, rename the flight controller module to a service file to allow install, clean-up the files and also create a debug file.
